@@ -14,3 +14,19 @@ void main() {
     });
   });
 }
+
+class TwitterClientData {
+  late String bearerToken;
+  late String consumerKey;
+  late String consumerSecret;
+  late String accessToken;
+  late String accessTokenSecret;
+
+  TwitterClientData({
+    required this.bearerToken,
+    required this.consumerKey,
+    required this.consumerSecret,
+    required this.accessToken,
+    required this.accessTokenSecret,
+  });
+}

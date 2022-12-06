@@ -9,14 +9,18 @@ import 'package:twitter_api_v2/twitter_api_v2.dart' as twtter_api;
 export 'package:twitter_api_v2/twitter_api_v2.dart';
 export 'src/twitter_client_base.dart';
 
-// TODO: Export any libraries intended for clients of this package.
+// ignore: todo
+// TODO: Put public facing types in this file.
 
+/// Checks if you are awesome. Spoiler: you are.
 class TwitterClient {
   late String bearer_token;
   late String consumer_key;
   late String consumer_secret;
   late String access_token;
   late String access_token_secret;
+
+  /// Checks if you are awesome. Spoiler: you are.
   TwitterClient({
     required String bearerToken,
     required String consumerKey,
@@ -31,6 +35,7 @@ class TwitterClient {
     access_token_secret = accessTokenSecret;
   }
 
+  /// Checks if you are awesome. Spoiler: you are.
   twtter_api.TwitterApi client({
     String? bearerToken,
     String? consumerKey,
@@ -62,6 +67,7 @@ class TwitterClient {
     );
   }
 
+  /// Checks if you are awesome. Spoiler: you are.
   invoke({
     required String method,
     Map? parameters,
@@ -71,15 +77,9 @@ class TwitterClient {
     String? accessToken,
     String? accessTokenSecret,
   }) {
-    twtter_api.TwitterApi twitter_client = client(
-      bearerToken: bearerToken,
-      consumerKey: consumerKey,
-      consumerSecret: consumerSecret,
-      accessToken: accessToken,
-      accessTokenSecret: accessTokenSecret,
-    );
   }
 
+  /// Checks if you are awesome. Spoiler: you are.
   request({
     required String method,
     Map? parameters,
@@ -99,7 +99,8 @@ class TwitterClient {
     twitter_client;
   }
 
-  Future<Map> sendMessage({ 
+  /// Checks if you are awesome. Spoiler: you are.
+  Future<Map> sendMessage({
     int chat_id = 0,
     required String text,
     String? bearerToken,
@@ -107,7 +108,7 @@ class TwitterClient {
     String? consumerSecret,
     String? accessToken,
     String? accessTokenSecret,
-  }) async{
+  }) async {
     twtter_api.TwitterApi twitter_client = client(
       bearerToken: bearerToken,
       consumerKey: consumerKey,
@@ -117,5 +118,4 @@ class TwitterClient {
     );
     return (await twitter_client.tweets.createTweet(text: text)).toJson();
   }
-
 }
