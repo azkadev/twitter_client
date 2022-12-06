@@ -71,12 +71,13 @@ class TwitterClient {
     String? accessToken,
     String? accessTokenSecret,
   }) {
-    client(
+    twtter_api.TwitterApi twitter_client = client(
       bearerToken: bearerToken,
       consumerKey: consumerKey,
       consumerSecret: consumerSecret,
       accessToken: accessToken,
       accessTokenSecret: accessTokenSecret,
     );
+    twitter_client;
   }
 }
