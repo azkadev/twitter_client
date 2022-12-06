@@ -62,5 +62,21 @@ class TwitterClient {
     );
   }
 
-  
+  request({
+    required String method,
+    Map? parameters,
+    String? bearerToken,
+    String? consumerKey,
+    String? consumerSecret,
+    String? accessToken,
+    String? accessTokenSecret,
+  }) {
+    client(
+      bearerToken: bearerToken,
+      consumerKey: consumerKey,
+      consumerSecret: consumerSecret,
+      accessToken: accessToken,
+      accessTokenSecret: accessTokenSecret,
+    );
+  }
 }
