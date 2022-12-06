@@ -6,8 +6,7 @@ Twitter client library yang mudah di gunakan
 
 1. [x] cross platform support
 2. [x] Multi client
-3. [ ] Api Readable + cantik
-
+3. [ ] Api Mudah di baca / di gunakan
 
 ## Install Library
 
@@ -19,7 +18,6 @@ dart pub add twitter_client
 ```bash
 import 'package:twitter_client/twitter_client.dart';
 ```
-
 
 ## Quickstart
 
@@ -44,5 +42,6 @@ Auto Post From Azkadev
   message += "\n${DateTime.now().millisecondsSinceEpoch}";
   print(await twitterClient.sendMessage(text: message));
 }
-
 ```
+
+### docs
