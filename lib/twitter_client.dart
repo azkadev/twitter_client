@@ -62,6 +62,24 @@ class TwitterClient {
     );
   }
 
+  invoke({
+    required String method,
+    Map? parameters,
+    String? bearerToken,
+    String? consumerKey,
+    String? consumerSecret,
+    String? accessToken,
+    String? accessTokenSecret,
+  }) {
+    twtter_api.TwitterApi twitter_client = client(
+      bearerToken: bearerToken,
+      consumerKey: consumerKey,
+      consumerSecret: consumerSecret,
+      accessToken: accessToken,
+      accessTokenSecret: accessTokenSecret,
+    );
+  }
+
   request({
     required String method,
     Map? parameters,
@@ -80,4 +98,24 @@ class TwitterClient {
     );
     twitter_client;
   }
+
+  Future<Map> sendMessage({ 
+    int chat_id = 0,
+    required String text,
+    String? bearerToken,
+    String? consumerKey,
+    String? consumerSecret,
+    String? accessToken,
+    String? accessTokenSecret,
+  }) async{
+    twtter_api.TwitterApi twitter_client = client(
+      bearerToken: bearerToken,
+      consumerKey: consumerKey,
+      consumerSecret: consumerSecret,
+      accessToken: accessToken,
+      accessTokenSecret: accessTokenSecret,
+    );
+    return (await twitter_client.tweets.createTweet(text: text)).toJson();
+  }
+
 }
