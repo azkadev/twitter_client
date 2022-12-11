@@ -76,8 +76,7 @@ class TwitterClient {
     String? consumerSecret,
     String? accessToken,
     String? accessTokenSecret,
-  }) {
-  }
+  }) {}
 
   /// Checks if you are awesome. Spoiler: you are.
   request({
