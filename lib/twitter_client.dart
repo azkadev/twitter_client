@@ -14,8 +14,7 @@ export 'src/twitter_client_base.dart';
 // ignore: todo
 // TODO: Put public facing types in this file.
 
-/// Checks if you are awesome. Spoiler: you are.
-class TwitterClient {
+class TwitterClientData {
   late String bearer_token;
   late String consumer_key;
   late String consumer_secret;
@@ -23,41 +22,36 @@ class TwitterClient {
   late String access_token_secret;
 
   /// Checks if you are awesome. Spoiler: you are.
+  TwitterClientData({
+    required this.bearer_token,
+    required this.consumer_key,
+    required this.consumer_secret,
+    required this.access_token_secret,
+    required this.access_token,
+  });
+}
+
+/// Checks if you are awesome. Spoiler: you are.
+class TwitterClient {
+  TwitterClientData twitter_client_data;
+
+  /// Checks if you are awesome. Spoiler: you are.
   TwitterClient({
-    required String bearerToken,
-    required String consumerKey,
-    required String consumerSecret,
-    required String accessToken,
-    required String accessTokenSecret,
-  }) {
-    bearer_token = bearerToken;
-    consumer_secret = consumerSecret;
-    consumer_key = consumerKey;
-    access_token = accessToken;
-    access_token_secret = accessTokenSecret;
-  }
+    required this.twitter_client_data,
+  });
 
   /// Checks if you are awesome. Spoiler: you are.
   twtter_api.TwitterApi client({
-    String? bearerToken,
-    String? consumerKey,
-    String? consumerSecret,
-    String? accessToken,
-    String? accessTokenSecret,
+    TwitterClientData? twitterClientData,
   }) {
-    bearerToken ??= bearer_token;
-    consumerKey ??= consumer_key;
-    consumerSecret ??= consumer_secret;
-    accessToken ??= access_token;
-    accessTokenSecret ??= access_token_secret;
-
+    twitterClientData ??= twitter_client_data;
     return twtter_api.TwitterApi(
-      bearerToken: bearerToken,
+      bearerToken: twitterClientData.bearer_token,
       oauthTokens: twtter_api.OAuthTokens(
-        consumerKey: consumerKey,
-        consumerSecret: consumerSecret,
-        accessToken: accessToken,
-        accessTokenSecret: accessTokenSecret,
+        consumerKey: twitterClientData.consumer_key,
+        consumerSecret: twitterClientData.consumer_secret,
+        accessToken: twitterClientData.access_token,
+        accessTokenSecret: twitterClientData.access_token_secret,
       ),
       retryConfig: twtter_api.RetryConfig.ofExponentialBackOffAndJitter(
         maxAttempts: 5,
@@ -73,29 +67,17 @@ class TwitterClient {
   invoke({
     required String method,
     Map? parameters,
-    String? bearerToken,
-    String? consumerKey,
-    String? consumerSecret,
-    String? accessToken,
-    String? accessTokenSecret,
+    TwitterClientData? twitterClientData,
   }) {}
 
   /// Checks if you are awesome. Spoiler: you are.
   request({
     required String method,
     Map? parameters,
-    String? bearerToken,
-    String? consumerKey,
-    String? consumerSecret,
-    String? accessToken,
-    String? accessTokenSecret,
+    TwitterClientData? twitterClientData,
   }) {
     twtter_api.TwitterApi twitter_client = client(
-      bearerToken: bearerToken,
-      consumerKey: consumerKey,
-      consumerSecret: consumerSecret,
-      accessToken: accessToken,
-      accessTokenSecret: accessTokenSecret,
+      twitterClientData: twitterClientData,
     );
     twitter_client;
   }
@@ -104,18 +86,10 @@ class TwitterClient {
   Future<Map> createReportByUsername({
     required String username,
     bool performBlock = true,
-    String? bearerToken,
-    String? consumerKey,
-    String? consumerSecret,
-    String? accessToken,
-    String? accessTokenSecret,
+    TwitterClientData? twitterClientData,
   }) async {
     twtter_api.TwitterApi twitter_client = client(
-      bearerToken: bearerToken,
-      consumerKey: consumerKey,
-      consumerSecret: consumerSecret,
-      accessToken: accessToken,
-      accessTokenSecret: accessTokenSecret,
+      twitterClientData: twitterClientData,
     );
     return (await twitter_client.users
             .createReportByName(username: username, performBlock: performBlock))
@@ -126,18 +100,10 @@ class TwitterClient {
   Future<Map> createReportById({
     required String user_id,
     bool performBlock = true,
-    String? bearerToken,
-    String? consumerKey,
-    String? consumerSecret,
-    String? accessToken,
-    String? accessTokenSecret,
+    TwitterClientData? twitterClientData,
   }) async {
     twtter_api.TwitterApi twitter_client = client(
-      bearerToken: bearerToken,
-      consumerKey: consumerKey,
-      consumerSecret: consumerSecret,
-      accessToken: accessToken,
-      accessTokenSecret: accessTokenSecret,
+      twitterClientData: twitterClientData,
     );
     return (await twitter_client.users
             .createReportById(userId: user_id, performBlock: performBlock))
@@ -150,18 +116,10 @@ class TwitterClient {
     String? description,
     String? url,
     String? location,
-    String? bearerToken,
-    String? consumerKey,
-    String? consumerSecret,
-    String? accessToken,
-    String? accessTokenSecret,
+    TwitterClientData? twitterClientData,
   }) async {
     twtter_api.TwitterApi twitter_client = client(
-      bearerToken: bearerToken,
-      consumerKey: consumerKey,
-      consumerSecret: consumerSecret,
-      accessToken: accessToken,
-      accessTokenSecret: accessTokenSecret,
+      twitterClientData: twitterClientData,
     );
     return (await twitter_client.users.updateProfile(
       name: name,
@@ -175,18 +133,10 @@ class TwitterClient {
   /// Checks if you are awesome. Spoiler: you are.
   Future<Map> updateProfileBanner({
     required File file,
-    String? bearerToken,
-    String? consumerKey,
-    String? consumerSecret,
-    String? accessToken,
-    String? accessTokenSecret,
+    TwitterClientData? twitterClientData,
   }) async {
     twtter_api.TwitterApi twitter_client = client(
-      bearerToken: bearerToken,
-      consumerKey: consumerKey,
-      consumerSecret: consumerSecret,
-      accessToken: accessToken,
-      accessTokenSecret: accessTokenSecret,
+      twitterClientData: twitterClientData,
     );
     return (await twitter_client.users.updateProfileBanner(file: file))
         .toJson();
@@ -195,18 +145,10 @@ class TwitterClient {
   /// Checks if you are awesome. Spoiler: you are.
   Future<Map> updateProfileImage({
     required File file,
-    String? bearerToken,
-    String? consumerKey,
-    String? consumerSecret,
-    String? accessToken,
-    String? accessTokenSecret,
+    TwitterClientData? twitterClientData,
   }) async {
     twtter_api.TwitterApi twitter_client = client(
-      bearerToken: bearerToken,
-      consumerKey: consumerKey,
-      consumerSecret: consumerSecret,
-      accessToken: accessToken,
-      accessTokenSecret: accessTokenSecret,
+      twitterClientData: twitterClientData,
     );
     return (await twitter_client.users.updateProfileImage(file: file)).toJson();
   }
@@ -215,18 +157,10 @@ class TwitterClient {
   Future<Map> sendMessage({
     int chat_id = 0,
     required String text,
-    String? bearerToken,
-    String? consumerKey,
-    String? consumerSecret,
-    String? accessToken,
-    String? accessTokenSecret,
+    TwitterClientData? twitterClientData,
   }) async {
     twtter_api.TwitterApi twitter_client = client(
-      bearerToken: bearerToken,
-      consumerKey: consumerKey,
-      consumerSecret: consumerSecret,
-      accessToken: accessToken,
-      accessTokenSecret: accessTokenSecret,
+      twitterClientData: twitterClientData,
     );
     return (await twitter_client.tweets.createTweet(text: text)).toJson();
   }
@@ -235,11 +169,7 @@ class TwitterClient {
   Future<Map> sendMessageAuto({
     int chat_id = 0,
     required String text,
-    String? bearerToken,
-    String? consumerKey,
-    String? consumerSecret,
-    String? accessToken,
-    String? accessTokenSecret,
+    TwitterClientData? twitterClientData,
     required void Function(
             twtter_api.TwitterResponse<twtter_api.TweetData, void> tweet,
             int index,
@@ -247,22 +177,14 @@ class TwitterClient {
         onData,
   }) async {
     twtter_api.TwitterApi twitter_client = client(
-      bearerToken: bearerToken,
-      consumerKey: consumerKey,
-      consumerSecret: consumerSecret,
-      accessToken: accessToken,
-      accessTokenSecret: accessTokenSecret,
+      twitterClientData: twitterClientData,
     );
 
     if (text.length < 280) {
       return sendMessage(
         chat_id: chat_id,
         text: text,
-        bearerToken: bearerToken,
-        consumerKey: consumerKey,
-        consumerSecret: consumerSecret,
-        accessToken: accessToken,
-        accessTokenSecret: accessTokenSecret,
+        twitterClientData: twitterClientData,
       );
     }
     await Future.delayed(Duration(seconds: 2));
