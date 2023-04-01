@@ -5,21 +5,21 @@
 
 library twitter_client;
 
-import 'dart:io';
+import "package:universal_io/io.dart";
 
 import 'package:twitter_api_v2/twitter_api_v2.dart' as twtter_api;
 export 'package:twitter_api_v2/twitter_api_v2.dart';
-export 'src/twitter_client_base.dart';
+
 
 // ignore: todo
 // TODO: Put public facing types in this file.
 
 class TwitterClientData {
-  late String bearer_token;
-  late String consumer_key;
-  late String consumer_secret;
-  late String access_token;
-  late String access_token_secret;
+  String bearer_token;
+  String consumer_key;
+  String consumer_secret;
+  String access_token;
+  String access_token_secret;
 
   /// Checks if you are awesome. Spoiler: you are.
   TwitterClientData({
